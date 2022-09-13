@@ -103,7 +103,7 @@ namespace BankAccount.Controllers
         public ActionResult CreateAccount()
         {
             ViewBag.Message = false;
-            return View();
+            return View("CreateAccount");
         }
 
         // POST: Users/Create
@@ -178,7 +178,7 @@ namespace BankAccount.Controllers
             ViewBag.Message = false;
             var userViewModel = new UserViewModel();
             try {
-                if (id == null)
+                if (id == null||id==0)
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
@@ -205,7 +205,7 @@ namespace BankAccount.Controllers
             {
                 Log.Error("log4net Error Level", ex);
             }            
-            return View(userViewModel);
+            return View("Edit",userViewModel);
         }
 
         // POST: Users/Edit/5
@@ -253,9 +253,10 @@ namespace BankAccount.Controllers
                         if (accountDetail != null)
                         {
                             db.AccountDetails.Remove(accountDetail);
+                            db.SaveChanges();
                         }
                     }
-                    db.SaveChanges();
+                    
                     return RedirectToAction("onAccountCreatedSuccess", new { id = userView.UserID });
                 }
             }
@@ -263,7 +264,7 @@ namespace BankAccount.Controllers
             {
                 Log.Error("log4net Error Level", ex);
             }
-            return View(userView);
+            return View("Edit",userView);
         }
 
         // GET: Users/Delete/5
@@ -285,7 +286,7 @@ namespace BankAccount.Controllers
             {
                 Log.Error("log4net Error Level", ex);
             }
-            return View(user);
+            return View("Delete",user);
         }
 
         // POST: Users/Delete/5
