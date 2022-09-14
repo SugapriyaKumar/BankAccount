@@ -16,6 +16,7 @@ namespace BankAccountTest
     public class UsersControllerTest
     {
         private dbUser db = new dbUser();
+        private string testUserName = "TestUser123";
         /// <summary>    
         /// This method used for index view    
         /// </summary>    
@@ -113,7 +114,7 @@ namespace BankAccountTest
             RedirectToRouteResult result = (RedirectToRouteResult)usersController.Edit(userView);
             Assert.IsTrue(result.RouteValues["action"].ToString() == "onAccountCreatedSuccess");
             Assert.IsInstanceOfType(result, typeof(RedirectToRouteResult));
-
+            DeleteTestUser();
         }
 
         [TestMethod]
@@ -143,11 +144,11 @@ namespace BankAccountTest
             Assert.IsNull(user);
         }
 
-        private UserViewModel CreateTestUser()
+        public UserViewModel CreateTestUser()
         {
             UserViewModel user = new UserViewModel()
             {
-                UserName = "TestUser123",
+                UserName = testUserName,
                 FirstName = "FN",
                 LastName = "LN",
                 Age = 29,
@@ -159,9 +160,9 @@ namespace BankAccountTest
             return user;
         }
 
-        private void DeleteTestUser()
+        public void DeleteTestUser()
         {
-            User dbUser = db.Users.First(u => u.UserName == "TestUser123");
+            User dbUser = db.Users.First(u => u.UserName == testUserName);
             db.Users.Remove(dbUser);
             db.SaveChanges();
         }
