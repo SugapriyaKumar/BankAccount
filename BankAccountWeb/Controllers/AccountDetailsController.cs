@@ -17,7 +17,7 @@ namespace BankAccount.Controllers
         private dbUser db = new dbUser();
         private static readonly ILog Log = LogManager.GetLogger(typeof(AccountDetailsController));
        
-        public ActionResult onAccountCreationFailure(int id)
+        public ActionResult OnAccountCreationFailure(int id)
         {
             try {
                 ViewBag.Message = "No Parent Account found with the given account number";
@@ -30,7 +30,7 @@ namespace BankAccount.Controllers
             {
                 Log.Error("log4net Error Level", ex);
             }                       
-            return View("onAccountCreationFailure");
+            return View("OnAccountCreationFailure");
         }
 
         public ActionResult Create()
@@ -69,16 +69,16 @@ namespace BankAccount.Controllers
                         db.Accounts.FirstOrDefault(a => a.AccountID == 
                                                 accountDetail.AccountID).AccountType = Enums.AccountTypes.Child;
                         db.SaveChanges();
-                        return RedirectToAction("onAccountCreatedSuccess", "Users", new { id = userID });
+                        return RedirectToAction("OnAccountCreatedSuccess", "Users", new { id = userID });
                     }                    
-                    return RedirectToAction("onAccountCreationFailure", new { id = userID });                                       
+                    return RedirectToAction("OnAccountCreationFailure", new { id = userID });                                       
                 }
                 ViewBag.AccountID = new SelectList(db.Accounts, "AccountID", "AccountID", accountDetail.AccountID);
             }
             catch(Exception ex)
             {
                 Log.Error("log4net Error Level", ex);
-                return RedirectToAction("onAccountCreationFailure", new { id = userID });
+                return RedirectToAction("OnAccountCreationFailure", new { id = userID });
             }
             return View(accountDetail);
         }

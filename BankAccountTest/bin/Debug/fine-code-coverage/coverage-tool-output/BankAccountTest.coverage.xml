@@ -2,10 +2,10 @@
 <CoverageSession xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="4.7.922.0">
   <Summary numSequencePoints="506" visitedSequencePoints="317" numBranchPoints="219" visitedBranchPoints="128" sequenceCoverage="62.65" branchCoverage="58.45" maxCyclomaticComplexity="13" minCyclomaticComplexity="1" maxCrapScore="182" minCrapScore="1" visitedClasses="12" numClasses="19" visitedMethods="91" numMethods="113" />
   <Modules>
-    <Module hash="6E-8F-62-7A-D3-3C-F1-7A-EE-09-2D-63-92-B4-53-1A-7A-82-5F-CE">
+    <Module hash="BC-F8-6C-E7-C0-CD-D4-FD-7D-5D-3D-B4-D2-D8-C0-57-4E-86-83-B7">
       <Summary numSequencePoints="131" visitedSequencePoints="121" numBranchPoints="19" visitedBranchPoints="17" sequenceCoverage="92.37" branchCoverage="89.47" maxCyclomaticComplexity="2" minCyclomaticComplexity="1" maxCrapScore="2.15" minCrapScore="1" visitedClasses="2" numClasses="2" visitedMethods="15" numMethods="15" />
       <ModulePath>C:\Users\196740\source\repos\BankAccount\BankAccountTest\bin\Debug\fine-code-coverage\build-output\BankAccountTest.dll</ModulePath>
-      <ModuleTime>2022-09-14T06:50:18.3640355Z</ModuleTime>
+      <ModuleTime>2022-09-14T07:30:26.4604518Z</ModuleTime>
       <ModuleName>BankAccountTest</ModuleName>
       <Files>
         <File uid="1" fullPath="C:\Users\196740\source\repos\BankAccount\BankAccountTest\AccountDetailsControllerTest.cs" />
@@ -383,10 +383,10 @@
         </Class>
       </Classes>
     </Module>
-    <Module hash="06-C4-B4-B0-7B-8B-08-10-AF-17-1D-B8-99-A8-57-3D-C6-1B-62-63">
+    <Module hash="9F-11-B5-11-B1-8B-D3-49-38-59-CC-3B-D5-0D-3A-02-8F-F9-47-50">
       <Summary numSequencePoints="375" visitedSequencePoints="196" numBranchPoints="200" visitedBranchPoints="111" sequenceCoverage="52.27" branchCoverage="55.5" maxCyclomaticComplexity="13" minCyclomaticComplexity="1" maxCrapScore="182" minCrapScore="1" visitedClasses="10" numClasses="17" visitedMethods="76" numMethods="98" />
       <ModulePath>C:\Users\196740\source\repos\BankAccount\BankAccountTest\bin\Debug\fine-code-coverage\build-output\BankAccount.dll</ModulePath>
-      <ModuleTime>2022-09-14T06:41:01.2253584Z</ModuleTime>
+      <ModuleTime>2022-09-14T07:30:25.7902021Z</ModuleTime>
       <ModuleName>BankAccount</ModuleName>
       <Files>
         <File uid="5" fullPath="C:\Users\196740\source\repos\BankAccount\BankAccountWeb\App_Start\BundleConfig.cs" />

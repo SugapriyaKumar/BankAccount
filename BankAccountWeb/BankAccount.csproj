@@ -249,8 +249,8 @@
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\AccountDetails\Create.cshtml" />
-    <Content Include="Views\Users\onAccountCreatedSuccess.cshtml" />
-    <Content Include="Views\AccountDetails\onAccountCreationFailure.cshtml" />
+    <Content Include="Views\Users\OnAccountCreatedSuccess.cshtml" />
+    <Content Include="Views\AccountDetails\OnAccountCreationFailure.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
-<coverage line-rate="0.6123188405797102" branch-rate="0.3490566037735849" lines-covered="338" lines-valid="552" branches-covered="37" branches-valid="106" complexity="95" version="0" timestamp="1663158057">
+<coverage line-rate="0.6123188405797102" branch-rate="0.3490566037735849" lines-covered="338" lines-valid="552" branches-covered="37" branches-valid="106" complexity="95" version="0" timestamp="1663162370">
   <sources />
   <packages>
     <package name="BankAccount" line-rate="0.4962962962962963" branch-rate="0.3431372549019608" complexity="78">

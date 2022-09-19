@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -46,7 +47,7 @@ namespace BankAccount.Controllers
             return View("Index",users);
         }
 
-        public ActionResult onAccountCreatedSuccess(int? id)
+        public ActionResult OnAccountCreatedSuccess(int? id)
         {
             var userViewModel = new UserViewModel();
             try 
@@ -154,7 +155,7 @@ namespace BankAccount.Controllers
 
                     if (age >= 18)
                     {
-                        return RedirectToAction("onAccountCreatedSuccess", new { id = user.UserID });
+                        return RedirectToAction("OnAccountCreatedSuccess", new { id = user.UserID });
                     }
                     else
                     {
@@ -163,6 +164,13 @@ namespace BankAccount.Controllers
                         return RedirectToAction("Create", "AccountDetails", "");
                     }
                 }
+            }
+            catch (DbUpdateException ex)
+            {
+                TempData["WarningMessage"] = "This user name is already taken and not available for your use";
+                ViewBag.Message = true;
+                Log.Error("log4net Error Level", ex);
+                return View(userView);
             }
             catch (Exception ex)
             {
@@ -257,7 +265,7 @@ namespace BankAccount.Controllers
                         }
                     }
                     
-                    return RedirectToAction("onAccountCreatedSuccess", new { id = userView.UserID });
+                    return RedirectToAction("OnAccountCreatedSuccess", new { id = userView.UserID });
                 }
             }
             catch (Exception ex)
