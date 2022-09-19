@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using BankAccount.Context;
 using BankAccount.Models;
+using BankAccount.ViewModel;
 using log4net;
 
 namespace BankAccount.Controllers
@@ -43,7 +44,7 @@ namespace BankAccount.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AccountDetailID,AccountID,ParentAcccountNumber,CanWithdraw,WithDrawLimit")] AccountDetail accountDetail)
+        public ActionResult Create([Bind(Include = "ParentAccountNumber,CanWithdraw,WithDrawLimit")] AccountDetailViewModel accountDetailViewModel)
         {
             int userID = 0;
             try
@@ -51,20 +52,26 @@ namespace BankAccount.Controllers
                 if (ModelState.IsValid)
                 {
                     userID = Convert.ToInt32(TempData["UserID"]);
-                    accountDetail.AccountID = Convert.ToInt32(TempData["AccountID"]);
+                    AccountDetail accountDetail = new AccountDetail()
+                    {
+                        AccountID= Convert.ToInt32(TempData["AccountID"]),
+                        ParentAcccountID=db.Accounts.FirstOrDefault(a=>a.AccountNumber==accountDetailViewModel.ParentAccountNumber).AccountID,
+                        CanWithdraw=accountDetailViewModel.CanWithdraw,
+                        WithDrawLimit=accountDetailViewModel.WithDrawLimit
+                    };
                     db.AccountDetails.Add(accountDetail);
                     Account thisAccount = db.Accounts.Find(accountDetail.AccountID);
-                    Account parentAccount = db.Accounts.FirstOrDefault(a => a.AccountNumber == accountDetail.ParentAcccountNumber);
+                    Account parentAccount = db.Accounts.FirstOrDefault(a => a.AccountID == accountDetail.ParentAcccountID);
 
                     //Parent account number should be a valid existing account number
                     //should not be same as the current account number or another child account number
-                    if(db.Accounts.Any(a=>a.AccountNumber==accountDetail.ParentAcccountNumber)&&
-                        accountDetail.ParentAcccountNumber!= thisAccount.AccountNumber && 
+                    if(accountDetail.ParentAcccountID!=0&&
+                        accountDetailViewModel.ParentAccountNumber != thisAccount.AccountNumber && 
                         parentAccount.AccountType!=Enums.AccountTypes.Child)
                     {
                         //Changing Account type to parent
-                        db.Accounts.FirstOrDefault(a => a.AccountNumber == 
-                                                accountDetail.ParentAcccountNumber).AccountType = Enums.AccountTypes.Parent;
+                        db.Accounts.FirstOrDefault(a => a.AccountID == 
+                                                accountDetail.ParentAcccountID).AccountType = Enums.AccountTypes.Parent;
                         //Changing Account type to child
                         db.Accounts.FirstOrDefault(a => a.AccountID == 
                                                 accountDetail.AccountID).AccountType = Enums.AccountTypes.Child;
@@ -73,14 +80,13 @@ namespace BankAccount.Controllers
                     }                    
                     return RedirectToAction("OnAccountCreationFailure", new { id = userID });                                       
                 }
-                ViewBag.AccountID = new SelectList(db.Accounts, "AccountID", "AccountID", accountDetail.AccountID);
             }
             catch(Exception ex)
             {
                 Log.Error("log4net Error Level", ex);
                 return RedirectToAction("OnAccountCreationFailure", new { id = userID });
             }
-            return View(accountDetail);
+            return View(accountDetailViewModel);
         }
 
         protected override void Dispose(bool disposing)

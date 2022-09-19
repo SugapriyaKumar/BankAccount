@@ -12,7 +12,7 @@ namespace BankAccount.Models
         [Key]
         public int AccountDetailID { get; set; }
         public int AccountID { get; set; }
-        public int ParentAcccountNumber { get; set; }
+        public int ParentAcccountID { get; set; }
         public bool CanWithdraw { get; set; }
         public double WithDrawLimit { get; set; }
 

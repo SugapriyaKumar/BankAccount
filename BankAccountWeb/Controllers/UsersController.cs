@@ -131,7 +131,6 @@ namespace BankAccount.Controllers
                     }
                     User user = new User()
                     {
-                        UserID = RandomNumberGenerator.PinGenerator(5),
                         CreatedTimeStamp = DateTime.Now,
                         UserName = userView.UserName,
                         FirstName = userView.FirstName,
@@ -141,7 +140,7 @@ namespace BankAccount.Controllers
 
                     var account = new Account()
                     {
-                        AccountNumber = RandomNumberGenerator.PinGenerator(10),
+                        AccountNumber = CreateUniqueAccountNumber(),
                         AccountType = userView.AccountType,
                         UserID = user.UserID,
                         CreatedTimeStamp = user.CreatedTimeStamp,
@@ -159,8 +158,9 @@ namespace BankAccount.Controllers
                     }
                     else
                     {
-                        TempData["UserID"] = user.UserID;
-                        TempData["AccountID"] = db.Accounts.FirstOrDefault(a => a.UserID == user.UserID).AccountID;
+                        var userID= db.Users.FirstOrDefault(u => u.UserName == user.UserName).UserID;
+                        TempData["UserID"] = userID;
+                        TempData["AccountID"] = db.Accounts.FirstOrDefault(a => a.UserID == userID).AccountID;
                         return RedirectToAction("Create", "AccountDetails", "");
                     }
                 }
@@ -179,6 +179,15 @@ namespace BankAccount.Controllers
             return View(userView);
         }
         
+        private int CreateUniqueAccountNumber()
+        {
+            int FinalAccountNumber = 0;
+            do
+            {
+                FinalAccountNumber = RandomNumberGenerator.PinGenerator(10);
+            } while (db.Accounts.Any(a => a.AccountNumber == FinalAccountNumber));
+            return FinalAccountNumber;
+        }
 
         // GET: Users/Edit/5
         public ActionResult Edit(int? id)
@@ -309,7 +318,7 @@ namespace BankAccount.Controllers
                 Account thisAccount = db.Accounts.FirstOrDefault(a => a.UserID == user.UserID);
                 if (thisAccount.AccountType == Enums.AccountTypes.Parent)
                 {
-                    AccountDetail ChildAccountDetail = db.AccountDetails.FirstOrDefault(a => a.ParentAcccountNumber == thisAccount.AccountNumber);
+                    AccountDetail ChildAccountDetail = db.AccountDetails.FirstOrDefault(a => a.ParentAcccountID == thisAccount.AccountID);
                     Account childAccount = new Account();
                     User childUser = new User();
                     if (ChildAccountDetail != null)

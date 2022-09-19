@@ -149,11 +149,16 @@
     <Compile Include="Migrations\202209091458442_CreateAccountDetail.designer.cs">
       <DependentUpon>202209091458442_CreateAccountDetail.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202209191000292_CorrectedAccountDetail.cs" />
+    <Compile Include="Migrations\202209191000292_CorrectedAccountDetail.Designer.cs">
+      <DependentUpon>202209191000292_CorrectedAccountDetail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\AccountDetail.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModel\AccountDetailViewModel.cs" />
     <Compile Include="ViewModel\UserViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -248,9 +253,9 @@
     <Content Include="Views\Users\Details.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
-    <Content Include="Views\AccountDetails\Create.cshtml" />
     <Content Include="Views\Users\OnAccountCreatedSuccess.cshtml" />
     <Content Include="Views\AccountDetails\OnAccountCreationFailure.cshtml" />
+    <Content Include="Views\AccountDetails\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -275,6 +280,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202209091458442_CreateAccountDetail.resx">
       <DependentUpon>202209091458442_CreateAccountDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202209191000292_CorrectedAccountDetail.resx">
+      <DependentUpon>202209191000292_CorrectedAccountDetail.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
