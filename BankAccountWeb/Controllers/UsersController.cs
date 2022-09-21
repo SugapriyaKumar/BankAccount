@@ -170,7 +170,6 @@ namespace BankAccount.Controllers
                 TempData["WarningMessage"] = "This user name is already taken and not available for your use";
                 ViewBag.Message = true;
                 Log.Error("log4net Error Level", ex);
-                return View(userView);
             }
             catch (Exception ex)
             {
